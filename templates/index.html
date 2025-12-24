@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PulseBoard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 40px;
+        }
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .buttons a {
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+        .ok { background-color: #28a745; }
+        .warn { background-color: #ffc107; color: black; }
+        .down { background-color: #dc3545; }
+        .status {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .time {
+            text-align: center;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>PulseBoard</h1>
+
+    <div class="buttons">
+        <a class="ok" href="/update/OK">OK</a>
+        <a class="warn" href="/update/WARNING">WARNING</a>
+        <a class="down" href="/update/DOWN">DOWN</a>
+    </div>
+
+    <div class="status">
+        Current Status: {{ status }}
+    </div>
+
+    <div class="time">
+        Last Updated: {{ time if time else "Not updated yet" }}
+    </div>
+</div>
+
+</body>
+</html>
+
