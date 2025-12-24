@@ -13,8 +13,7 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 sh '''
-                python3 -m venv venv
-                source venv/bin/activate
+                python3 -m venv venv || true
                 '''
             }
         }
@@ -22,21 +21,20 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                source venv/bin/activate
-                pip install --upgrade pip
-                pip install -r requirements.txt
+                ./venv/bin/pip install --upgrade pip
+                ./venv/bin/pip install -r requirements.txt
                 '''
             }
         }
 
         stage('Run Application') {
-        steps {
-            sh '''
-            cd /var/lib/jenkins/workspace/pulseboard-pipeline
-            pkill -f app.py || true
-            nohup ./venv/bin/python app.py > app.log 2>&1 &
-            '''
-           }
-       }
-    } 
+            steps {
+                sh '''
+                pkill -f app.py || true
+                nohup ./venv/bin/python app.py > app.log 2>&1 &
+                '''
+            }
+        }
+    }
 }
+
