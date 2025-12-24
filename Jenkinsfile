@@ -25,16 +25,17 @@ pipeline {
                 ./venv/bin/pip install -r requirements.txt
                 '''
             }
-        }
+         }
+         
+       stage('Restart PulseBoard Service') {
+           steps {
+           sh '''
+           sudo systemctl restart pulseboard
+            '''
+       }
+     }
+   
+]
 
-        stage('Run Application') {
-            steps {
-                sh '''
-                pkill -f app.py || true
-                nohup ./venv/bin/python app.py > app.log 2>&1 &
-                '''
-            }
-        }
-    }
 }
 
