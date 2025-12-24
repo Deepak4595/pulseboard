@@ -30,13 +30,13 @@ pipeline {
         }
 
         stage('Run Application') {
-            steps {
-                sh '''
-                pkill -f app.py || true
-                source venv/bin/activate
-                nohup python app.py > app.log 2>&1 &
-                '''
-            }
-        }
-    }
+        steps {
+            sh '''
+            cd /var/lib/jenkins/workspace/pulseboard-pipeline
+            pkill -f app.py || true
+            nohup ./venv/bin/python app.py > app.log 2>&1 &
+            '''
+           }
+       }
+    } 
 }
